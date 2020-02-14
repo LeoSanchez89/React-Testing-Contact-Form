@@ -1,7 +1,6 @@
 import React from "react";
 import ContactForm from "./ContactForm";
 import { render, fireEvent, waitForElement } from "@testing-library/react";
-
 // test("firstName, lastName, email, message inputs are rendered", () => {
 //     const { getByLabelText } = render(<ContactForm />);
 // 	getByLabelText(/first name/i);
@@ -9,7 +8,6 @@ import { render, fireEvent, waitForElement } from "@testing-library/react";
 // 	getByLabelText(/email/i);
 // 	getByLabelText(/message/i);
 // });
-
 test("all input fields are rendered and functional", async () => {
 	const { getByLabelText, getByTestId, getByText, queryByTestId } = render(
 		<ContactForm />
@@ -28,14 +26,14 @@ test("all input fields are rendered and functional", async () => {
 	expect(lastNameInput.value).toBe("Test Last Name");
 	expect(emailInput.value).toBe("TestEmail@email.com");
 	expect(messageInput.value).toBe("Test Message");
-
 	expect(emailInput).toHaveAttribute("placeholder");
-	// expect(firstNameInput).not.toHaveAttribute("maxLength");
 
+	// expect(firstNameInput).not.toHaveAttribute("maxLength");
 	fireEvent.click(getByTestId("submit-button"));
 	// getByText("Looks like there was an error: maxLength");
-	// expect(queryByTestId("submit-data")).toBeFalsy();
-    await waitForElement(() => getByTestId("submit-data"));
+	await waitForElement(() =>
+		getByText("Looks like there was an error: maxLength")
+	);
+	expect(queryByTestId("submit-data")).toBeFalsy();
 });
-
 // name max length
