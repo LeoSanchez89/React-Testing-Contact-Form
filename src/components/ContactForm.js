@@ -12,11 +12,7 @@ const ContactForm = () => {
 
   return (
 		<div className="App">
-			<form
-				data-testid="login-form"
-				onSubmit={handleSubmit(onSubmit)}
-				data-testid="login-form"
-			>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div>
 					<label htmlFor="firstName">First Name*</label>
 					<input
@@ -64,11 +60,14 @@ const ContactForm = () => {
 					/>
 				</div>
 				{data && (
-					<pre style={{ textAlign: "left", color: "white" }}>
+					<pre
+						data-testid="submit-data"
+						style={{ textAlign: "left", color: "white" }}
+					>
 						{JSON.stringify(data, null, 2)}
 					</pre>
 				)}
-				<input type="submit" />
+				<input data-testid="submit-button" type="submit" />
 			</form>
 		</div>
 	);
